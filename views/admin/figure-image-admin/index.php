@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-use app\models\figures\Figure;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\figures\FigureSearch */
+/* @var $searchModel app\models\figures\FigureImageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Картины';
+$this->title = 'Изображения картины №'. $figure_id;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="figure-index">
+<div class="figure-image-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить картину', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить изображение', ['create', 'figure_id' => $figure_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Картина', ['admin/figure-admin/view', 'id' => $figure_id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,14 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'preview:ntext',
-            'description:ntext',
-
+            'url:url',
+            'alt',
+            'title',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Figure $model, $key, $index, $column) {
+                'urlCreator' => function ($action, FigureImage $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

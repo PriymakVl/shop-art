@@ -53,12 +53,13 @@ class Figure extends AppModel
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => '№ картины',
             'name' => 'Название',
             'preview' => 'Краткое описание',
             'description' => 'Полное описание',
             'prices' => 'Цены',
             'status' => 'Status',
+            'state' => 'Состояние',
             'listCategories' => 'Список категорий',
         ];
     }
