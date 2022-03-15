@@ -46,6 +46,7 @@ $this->title = 'Админка сайта'
             ['label' => 'Размеры', 'url' => ['/admin/dimensions-admin/index']],
             ['label' => 'Цены', 'url' => ['/admin/price-admin/index']],
             ['label' => 'Автор', 'url' => ['/admin/author-admin/view']],
+            ['label' => 'Доставка', 'url' => ['/admin/delivery-admin/view']],
         ],
     ]);
     NavBar::end();
