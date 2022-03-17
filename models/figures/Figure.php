@@ -54,7 +54,7 @@ class Figure extends AppModel
     {
         return [
             'id' => '№ картины',
-            'name' => 'Название',
+            'name' => 'Название картины',
             'preview' => 'Краткое описание',
             'description' => 'Полное описание',
             'prices' => 'Цены',

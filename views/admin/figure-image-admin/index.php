@@ -4,12 +4,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use app\models\figures\FigureImage;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\figures\FigureImageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Изображения картины №'. $figure_id;
+
+$this->params['breadcrumbs'][] = ['label' => 'Картины', 'url' => ['admin/figure-admin/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Картина №'. $figure_id, 'url' => ['admin/figure-admin/view', 'id' => $figure_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="figure-image-index">
@@ -25,15 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'url:url',
+            ['attribute' => 'url',
+             'label' => 'Изображения картины',
+             'value' => function($model) { 
+                 return Html::img('@web/'.$model->url, ['width' => '150']);
+              },
+              'format' => 'raw',
+            ],
+
             'alt',
             'title',
             [
                 'class' => ActionColumn::className(),
+                'template' => '{update} {delete}',
                 'urlCreator' => function ($action, FigureImage $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }

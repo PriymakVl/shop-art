@@ -6,9 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\figures\Figure */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Figures', 'url' => ['index']];
+$this->title = 'Картина №'. $model->id;
+
+$this->params['breadcrumbs'][] = ['label' => 'Картины', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="figure-view">
@@ -40,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'preview:ntext',
             'description:ntext',
-            'status',
         ],
     ]) ?>
 

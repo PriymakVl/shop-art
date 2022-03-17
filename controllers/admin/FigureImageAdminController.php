@@ -2,6 +2,7 @@
 
 namespace app\controllers\admin;
 
+use Yii;
 use app\models\figures\FigureImage;
 use app\models\figures\FigureImageSearch;
 use app\controllers\AppController;
@@ -13,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class FigureImageAdminController extends AppController
 {
+    public $layout = 'admin';
+
     /**
      * @inheritDoc
      */
@@ -66,21 +69,21 @@ class FigureImageAdminController extends AppController
      * If creation is successful, the browser will be redirected to the 'index' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($figure_id)
+    public function actionCreate()
     {
         $model = new FigureImage();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index', 'figure_id' => $figure_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+        if ($this->request->isGet) {
+            $model->figure_id = Yii::$app->request->get('figure_id');
+            // $model->loadDefaultValues();
+            return $this->render('create', ['model' => $model]);
         }
-
-        return $this->render('create', [
-            'model' => $model, 'figure_id' => $figure_id,
-        ]);
+        if ($model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['index', 'figure_id' => $model->figure_id]);
+        }
+        else {
+           echo 'no';
+            
+        }
     }
 
     /**
@@ -95,7 +98,7 @@ class FigureImageAdminController extends AppController
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'figure_id' => $model->figure_id]);
         }
 
         return $this->render('update', [
@@ -112,9 +115,12 @@ class FigureImageAdminController extends AppController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $figure_id = $model->figure_id;
+        unlink(Yii::$app->basePath . '/web/' . $model->url);
+        $model->delete();
+        Yii::$app->session->setFlash('success', 'Изображение успешно удалено');
+        return $this->redirect(['index', 'figure_id' => $figure_id]);
     }
 
     /**

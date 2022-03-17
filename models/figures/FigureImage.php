@@ -3,6 +3,7 @@
 namespace app\models\figures;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "figure_images".
@@ -16,6 +17,8 @@ use Yii;
  */
 class FigureImage extends \app\models\AppModel
 {
+    public $image;
+
     /**
      * {@inheritdoc}
      */
@@ -30,10 +33,11 @@ class FigureImage extends \app\models\AppModel
     public function rules()
     {
         return [
-            [['figure_id', 'url'], 'required'],
+            [['figure_id'], 'required'],
             [['figure_id', 'status'], 'integer'],
-            ['url', 'file'],
-            [['alt', 'title'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => 1],
+            ['image', 'file'],
+            [['alt', 'title', 'url'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,10 +49,32 @@ class FigureImage extends \app\models\AppModel
         return [
             'id' => 'ID',
             'figure_id' => '№ картины',
+            'image' => 'Изображение',
             'url' => 'Url',
             'alt' => 'Alt',
             'title' => 'Title',
             'status' => 'Status',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            if (!$this->upload()) return false;
+        }
+        return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->setFlashAfterSave($insert);
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    private function upload()
+    {
+        $image = UploadedFile::getInstance($this, 'image');
+        $this->url = 'paintings/' . time() . '.' . $image->extension;
+        return $image->saveAs($this->url);
     }
 }
