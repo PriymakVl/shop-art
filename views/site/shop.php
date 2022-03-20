@@ -3,11 +3,8 @@
 
 $this->title = 'Shop Art';
 ?>
-<div class="site-index">
-    <div class="mb-3">
-        <img src="/images/bg.webp" alt="" style="width:100%;">
-    </div>
 
+<div class="site-index">
     <div class="body-content">
 
         <div class="row">

@@ -33,7 +33,7 @@ $this->title = 'Shop Figure';
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Магазин', 'url' => ['/site/index']],
+            ['label' => 'Магазин', 'url' => ['/shop']],
             ['label' => 'Информация', 'url' => ['/site/about']],
             ['label' => 'Корзина', 'url' => ['/site/contact']],
             ['label' => 'Админка', 'url' => ['/admin/category-admin/index']],
@@ -51,12 +51,7 @@ $this->title = 'Shop Figure';
     </div>
 </main>
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<?= $this->render('//templates/footer') ?>
 
 <?php $this->endBody() ?>
 </body>

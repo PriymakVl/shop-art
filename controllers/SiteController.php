@@ -7,11 +7,16 @@ use yii\filters\AccessControl;
 use app\controllers\AppController;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\categories\Category;
+use app\models\figures\Figure;
 
 class SiteController extends AppController
 {
+    const PAGE_SIZE = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -61,7 +66,22 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $categories = Category::findAll(['status' => Category::STATUS_ACTIVE]);
+        $query = Figure::find()->where(['status' => Figure::STATUS_ACTIVE]);
+        $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => self::PAGE_SIZE]);
+        $figures = $query->offset($pages->offset)->limit($pages->limit)->all();
+        return $this->render('index', compact('categories', 'figures', 'pages'));
+    }
+
+    public function actionShop($cat_id = false) 
+    {
+        $categories = Category::findAll(['status' => Category::STATUS_ACTIVE]);
+
+        if ($cat_id) $figures = $this->getFiguresForPagination($cat_id);
+        else $figures = Figure::findAll(['status' => Figure::STATUS_ACTIVE]);
+        
+        $pages = new Pagination(['totalCount' => count($figures), 'pageSize' => self::PAGE_SIZE]);
+        return $this->render('shop', compact('categories', 'figures', 'pages'));
     }
 
     /**
@@ -124,5 +144,14 @@ class SiteController extends AppController
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    private function getFiguresForPagination($cat_id)
+    {
+        $figures = Figure::getForCategory($cat_id);
+        if (!$figures) return;
+        $page = Yii::$app->request->get('page', 1);
+        $offset = ($page - 1) . self::PAGE_SIZE;
+        return array_slice($figures, $offset, self::PAGE_SIZE);
     }
 }

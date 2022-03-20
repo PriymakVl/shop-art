@@ -74,15 +74,10 @@ class FigureImageAdminController extends AppController
         $model = new FigureImage();
         if ($this->request->isGet) {
             $model->figure_id = Yii::$app->request->get('figure_id');
-            // $model->loadDefaultValues();
             return $this->render('create', ['model' => $model]);
         }
         if ($model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['index', 'figure_id' => $model->figure_id]);
-        }
-        else {
-           echo 'no';
-            
         }
     }
 

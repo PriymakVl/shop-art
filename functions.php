@@ -19,3 +19,5 @@ function debugProp($objects, $name_property)
     }  
     debug($properties);
 }
+
+    

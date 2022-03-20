@@ -84,6 +84,15 @@ class Figure extends AppModel
         return $categories;
     }
 
+    public function getIdsCategories()
+    {
+        if (!$this->categories) return;
+        foreach ($this->categories as $cat) {
+            $ids[] = $cat->id;
+        }
+        return $ids;
+    }
+
     public function getListCategories()
     {
         if (!$this->categories) return;
@@ -94,6 +103,24 @@ class Figure extends AppModel
     public function getPrices()
     {
         return Price::findAll(['figure_id' => $this->id, 'state' => self::STATE_ACTIVE , 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public function getPaintings()
+    {
+        return FigureImage::findAll(['figure_id' => $this->id, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function getForCategory($cat_id)
+    {
+        $items = self::findAll(['status' => Figure::STATUS_ACTIVE]);
+        if (!$cat_id) return $items;
+        $filtered = [];
+        foreach ($items as $item) {
+            if (in_array($cat_id, $item->idsCategories)) {
+                $filtered[] = $item;
+            }
+        }
+        return $filtered;
     }
 
     
