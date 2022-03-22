@@ -45,6 +45,6 @@ if ($figures) {
     </div>
     <!-- pagination -->
     <div class="row mt-4 justify-content-center">
-            <?php echo LinkPager::widget(['pagination' => $pages,]); ?>
+            <?php echo LinkPager::widget(['pagination' => $pages]); ?>
     </div>
 </div>

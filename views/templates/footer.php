@@ -1,18 +1,18 @@
 <?php
     use yii\widgets\ActiveForm;
     use yii\helpers\Html;
+    use app\models\subscribers\Subscriber;
 
-    $subscribe = new Subscribe();
+    $subscribe = new Subscriber();
 ?>
 
 <footer class="footer mt-auto py-3 text-muted mb-3">
     <div class="container">
         <!-- update subscription form -->
         <div class="row justify-content-center">
-            <? $form = ActiveForm::begin(); ?>
-            <!-- ['action' => '/admin/subscribe/add', ['options' => ['class' => 'form-gorizontal']]] -->
-                <?= $form->field($subscribe, 'update') ?>
-                <?= Html::submitButton('Subscribe', ['class' => 'btn btn-primary', 'name' => 'login-button', 'value' => 'yes'])?>
+            <? $form = ActiveForm::begin(['action' => '/admin/subscriber-admin/create', 'options' => ['class' => 'form-inline']]); ?>
+                <?= $form->field($subscribe, 'email')->label(false) ?>
+                <?= Html::submitButton('Subscribe', ['class' => 'btn btn-primary', 'name' => 'subscribe', 'value' => 'yes'])?>
             <? ActiveForm::end(); ?>
         </div>
         <!-- footer content -->

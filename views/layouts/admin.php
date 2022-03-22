@@ -38,22 +38,28 @@ $this->title = 'Админка сайта'
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Картины', 'url' => ['/admin/figure-admin/index']],
+            [
+                'label' => 'Картины',
+                'items' => [
+                    ['label' => 'Картины', 'url' => ['/admin/figure-admin/index']],
+                    ['label' => 'Холсты', 'url' => ['/admin/canvas-admin/index']],
+                    ['label' => 'Рамки', 'url' => ['/admin/frame-admin/index']],
+                    ['label' => 'Размеры', 'url' => ['/admin/dimensions-admin/index']],
+                    ['label' => 'Цены', 'url' => ['/admin/price-admin/index']],
+                ]
+            ],
             ['label' => 'Категории', 'url' => ['/admin/category-admin/index']],
             ['label' => 'Заказы', 'url' => ['/admin/order-admin/index']],
-            ['label' => 'Холсты', 'url' => ['/admin/canvas-admin/index']],
-            ['label' => 'Рамки', 'url' => ['/admin/frame-admin/index']],
-            ['label' => 'Размеры', 'url' => ['/admin/dimensions-admin/index']],
-            ['label' => 'Цены', 'url' => ['/admin/price-admin/index']],
             ['label' => 'Автор', 'url' => ['/admin/author-admin/view']],
             ['label' => 'Доставка', 'url' => ['/admin/delivery-admin/view']],
+            ['label' => 'Подписчики', 'url' => ['/admin/subscriber-admin/index']],
         ],
     ]);
     NavBar::end();
     ?>
 </header>
 
-<main role="main" class="flex-shrink-0">
+<main role="main" class="flex-shrink-0 mt-5">
     <div class="container">
         <?= Breadcrumbs::widget([
            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
