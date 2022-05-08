@@ -13,7 +13,7 @@ $this->title = 'Shop Art';
         <div class="row">
             <!-- sidebar -->
             <?= $this->render('_sidebar', ['categories' => $categories]) ?>
-
+            
             <!-- gallery -->
             <?= $this->render('_gallery', compact('figures', 'pages')) ?>
         </div>

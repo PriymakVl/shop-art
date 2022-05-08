@@ -3,6 +3,7 @@
 namespace app\models\prices;
 
 use Yii;
+use app\models\figures\Figure;
 
 /**
  * This is the model class for table "prices".
@@ -69,6 +70,11 @@ class Price extends \app\models\AppModel
     {
         $this->setFlashAfterSave($insert);
         parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getFigure()
+    {
+        return $this->hasOne(Figure::className(), ['id' => 'figure_id']);
     }
 
 }

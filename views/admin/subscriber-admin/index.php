@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => [Subscriber::STATE_HANDLED => 'Обработан', Subscriber::STATE_NOT_HANDLED => 'Не обработан'],
                 'filterInputOptions' => ['prompt' => 'Не выбрано'],
                 'value' => function($model) { 
-                    return $model->state = Subscriber::STATE_HANDLED ? 'Обработан' : 'Не обработан'; 
+                    return ($model->state == Subscriber::STATE_HANDLED) ? 'Обработан' : 'Не обработан'; 
                 }
             ],
             [

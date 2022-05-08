@@ -123,6 +123,15 @@ class Figure extends AppModel
         return $filtered;
     }
 
+    public function createArrayPrices() 
+    {
+        if (!$this->prices) return;
+        foreach ($this->prices as $price) {
+            $prices[$price->id] = $price->options . '(' . $price->stringCurrency . ' ' . $price->value . '.00)';
+        }
+        return $prices;
+    }
+
     
 
 

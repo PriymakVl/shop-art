@@ -1,0 +1,10 @@
+/* cart */
+.cart-total-price span {
+    font-size: 1.5em;
+    font-weight: bold;
+    
+}
+
+.cart-total-price span:first-child {
+    margin-right: 40px;
+}

@@ -16,11 +16,13 @@ if ($figures) {
                 <? foreach ($first_col as $figure): ?>
                     <? if ($figure->paintings): ?>
                         <div>
-                            <img style="width:100%;"
-                                src="/<?= $figure->paintings[0]->url ?>" 
-                                alt="<?= $figure->paintings[0]->alt ?>"
-                                title="<?= $figure->paintings[0]->title ?>"
-                            >
+                            <a href="/figure?id=<?= $figure->id ?>">
+                                <img style="width:100%;"
+                                    src="/<?= $figure->paintings[0]->url ?>" 
+                                    alt="<?= $figure->paintings[0]->alt ?>"
+                                    title="<?= $figure->paintings[0]->title ?>"
+                                >
+                            </a>
                         </div>
                     <? endif; ?>
                 <? endforeach; ?>
@@ -32,11 +34,13 @@ if ($figures) {
                 <? foreach ($second_col as $figure): ?>
                     <? if ($figure->paintings): ?>
                         <div>
-                            <img style="width:100%;"
-                                src="/<?= $figure->paintings[0]->url ?>" 
-                                alt="<?= $figure->paintings[0]->alt ?>"
-                                title="<?= $figure->paintings[0]->title ?>"
-                            >
+                            <a href="/figure?id=<?= $figure->id ?>">
+                                <img style="width:100%;"
+                                    src="/<?= $figure->paintings[0]->url ?>" 
+                                    alt="<?= $figure->paintings[0]->alt ?>"
+                                    title="<?= $figure->paintings[0]->title ?>"
+                                >
+                            </a>    
                         </div>
                     <? endif; ?>
                 <? endforeach; ?>

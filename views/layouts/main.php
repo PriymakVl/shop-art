@@ -9,9 +9,15 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use app\models\Cart;
+
+$cart = new Cart();
 
 AppAsset::register($this);
 $this->title = 'Shop Figure';
+
+$items_cart = count($_SESSION['cart']);
+// debug($_SESSION['cart']);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,7 +41,7 @@ $this->title = 'Shop Figure';
         'items' => [
             ['label' => 'Магазин', 'url' => ['/shop']],
             ['label' => 'Информация', 'url' => ['/site/about']],
-            ['label' => 'Корзина', 'url' => ['/site/contact']],
+            ['label' => $cart->getLabel(), 'url' => ['/cart']],
             ['label' => 'Админка', 'url' => ['/admin/category-admin/index']],
         ],
     ]);

@@ -12,10 +12,11 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\categories\Category;
 use app\models\figures\Figure;
+use app\models\Cart;
 
 class SiteController extends AppController
 {
-    const PAGE_SIZE = 1;
+    const PAGE_SIZE = 2;
 
     /**
      * {@inheritdoc}
@@ -82,6 +83,15 @@ class SiteController extends AppController
         
         $pages = new Pagination(['totalCount' => count($figures), 'pageSize' => self::PAGE_SIZE]);
         return $this->render('shop', compact('categories', 'figures', 'pages'));
+    }
+
+    public function actionFigure($id)
+    {
+        $figure = Figure::findOne(['id' => $id, 'status' => Figure::STATUS_ACTIVE]);
+        $cart = new Cart();
+        $cart->figureId = $id;
+        // debug($_SESSION);
+        return $this->render('figure', compact('figure', 'cart'));
     }
 
     /**
@@ -151,7 +161,7 @@ class SiteController extends AppController
         $figures = Figure::getForCategory($cat_id);
         if (!$figures) return;
         $page = Yii::$app->request->get('page', 1);
-        $offset = ($page - 1) . self::PAGE_SIZE;
+        $offset = ($page - 1) * self::PAGE_SIZE;
         return array_slice($figures, $offset, self::PAGE_SIZE);
     }
 }

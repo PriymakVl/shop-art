@@ -50,6 +50,8 @@ $config = [
             'rules' => [
                 '/' => 'site/index',
                 'shop' => 'site/shop',
+                'figure' => 'site/figure',
+                'cart' => 'cart/index',
             ],
         ],
     ],
