@@ -35,6 +35,6 @@
 <!-- form card -->
 <div class="row justify-content-center">
     <div class="col-lg-6">
-        <?= $this->render('card/_form', ['figure' => $figure, 'cart' => $cart]) ?>
+        <?= $this->render('cart/_form', ['figure' => $figure, 'cart' => $cart]) ?>
     </div>
 </div>
