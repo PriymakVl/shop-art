@@ -48,8 +48,8 @@ class Cart extends \app\models\AppModel
 
     public function getLabel()
     {
-        if (empty($_SESSION['cart'])) return 'Корзина';
-        return 'Корзина(' . $_SESSION['cart']['qty'] . ')';
+        if (empty($_SESSION['cart'])) return 'Cart';
+        return 'Cart(' . $_SESSION['cart']['qty'] . ')';
     }
 
     public function getItems()

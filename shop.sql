@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 24 2022 г., 17:24
+-- Время создания: Май 17 2022 г., 10:20
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.1.32
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- База данных: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `author`
+--
+
+CREATE TABLE `author` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -82,7 +95,19 @@ CREATE TABLE `category_figures` (
 INSERT INTO `category_figures` (`id`, `cat_id`, `figure_id`, `status`) VALUES
 (1, 1, 1, 1),
 (2, 2, 1, 1),
-(3, 2, 2, 1);
+(3, 2, 2, 1),
+(4, 1, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `delivery`
+--
+
+CREATE TABLE `delivery` (
+  `id` int(11) NOT NULL,
+  `text` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -125,9 +150,9 @@ CREATE TABLE `figures` (
 --
 
 INSERT INTO `figures` (`id`, `name`, `preview`, `description`, `status`) VALUES
-(1, 'test name', 'test preview', 'test description', 1),
-(2, 'dog name', 'dog preview', 'dog description', 1),
-(3, 'dog name', 'dog preview', 'dog description', 1);
+(1, 'tiger', 'tiger description', 'tiger description full', 1),
+(2, 'dog', 'dog preview', 'dog description', 1),
+(4, 'Волк', 'Волк описание краткое', 'Волк описание полное\r\n', 1);
 
 -- --------------------------------------------------------
 
@@ -143,6 +168,27 @@ CREATE TABLE `figure_images` (
   `title` varchar(255) DEFAULT NULL,
   `status` smallint(2) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `figure_images`
+--
+
+INSERT INTO `figure_images` (`id`, `figure_id`, `url`, `alt`, `title`, `status`) VALUES
+(9, 1, 'paintings/1647579459.webp', 'tiger 1', 'tiger  1', 1),
+(10, 1, 'paintings/1647579488.webp', 'tiger 2', 'tiger 2', 1),
+(11, 1, 'paintings/1647579514.webp', 'tiger 3', 'tiger 4', 1),
+(12, 1, 'paintings/1647579544.webp', 'tiger 4', 'tiger 4', 1),
+(13, 1, 'paintings/1647579589.webp', 'tiger 5', 'tiger 5', 1),
+(15, 4, 'paintings/1647593957.webp', 'волк 1', 'волк 2', 1),
+(16, 4, 'paintings/1647593983.webp', 'ВОЛК 2', 'ВОЛК 2', 1),
+(17, 4, 'paintings/1647594012.webp', 'ВОЛК 3', 'волк 3', 1),
+(18, 4, 'paintings/1647594055.webp', 'волк 4', 'волк 4', 1),
+(19, 4, 'paintings/1647594075.webp', 'волк 5', 'волк 5', 1),
+(20, 2, 'paintings/1647594277.webp', 'dog 1', 'dog 1', 1),
+(21, 2, 'paintings/1647594300.webp', 'dog 1', 'dog 1', 1),
+(22, 2, 'paintings/1647594321.webp', 'dog 3', 'dog 3', 1),
+(23, 2, 'paintings/1647594344.webp', 'dog 4', 'dog 4', 1),
+(24, 2, 'paintings/1647594365.webp', 'dog 5', 'dog 5', 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +236,10 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m220210_034812_create_table_frames', 1644465055),
 ('m220210_040436_create_table_dimensions', 1644515178),
 ('m220210_180521_create_table_prices', 1644516713),
-('m220224_103515_create_table_figure_image', 1645700424);
+('m220224_103515_create_table_figure_image', 1645700424),
+('m220313_153445_create_table_author', 1647766475),
+('m220315_144728_create_table_delivery', 1647766475),
+('m220320_091022_create_table_subscribers', 1647767490);
 
 -- --------------------------------------------------------
 
@@ -239,9 +288,36 @@ INSERT INTO `prices` (`id`, `value`, `currency`, `figure_id`, `options`, `state`
 (4, '10', 1, 2, '34 x 34', 1, 1),
 (5, '25', 1, 1, '12\"x16\" Framed Canvas Paper', 0, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `date` varchar(100) NOT NULL,
+  `state` smallint(2) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `email`, `date`, `state`) VALUES
+(1, 'test@mail.com', '1647907413', 1),
+(2, 'test2@mail.com', '1647958819', 0);
+
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `author`
+--
+ALTER TABLE `author`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `canvases`
@@ -259,6 +335,12 @@ ALTER TABLE `categories`
 -- Индексы таблицы `category_figures`
 --
 ALTER TABLE `category_figures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `delivery`
+--
+ALTER TABLE `delivery`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -304,8 +386,20 @@ ALTER TABLE `prices`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `author`
+--
+ALTER TABLE `author`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `canvases`
@@ -323,7 +417,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `category_figures`
 --
 ALTER TABLE `category_figures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `delivery`
+--
+ALTER TABLE `delivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `dimensions`
@@ -335,13 +435,13 @@ ALTER TABLE `dimensions`
 -- AUTO_INCREMENT для таблицы `figures`
 --
 ALTER TABLE `figures`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `figure_images`
 --
 ALTER TABLE `figure_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT для таблицы `frames`
@@ -360,6 +460,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `prices`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT для таблицы `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

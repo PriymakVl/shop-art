@@ -39,12 +39,21 @@ $items_cart = count($_SESSION['cart']);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Магазин', 'url' => ['/shop']],
-            ['label' => 'Информация', 'url' => ['/site/about']],
+            ['label' => 'Shop', 'url' => ['/shop']],
+            ['label' => 'About', 'url' => ['/about']],
+            ['label' => 'Shipping', 'url' => ['/shipping']],
+            ['label' => 'Contact', 'url' => ['/contact']],
             ['label' => $cart->getLabel(), 'url' => ['/cart']],
             ['label' => 'Админка', 'url' => ['/admin/category-admin/index']],
         ],
     ]);
+
+    echo '<form class="navbar-form form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>';
 
     NavBar::end();
     ?>
@@ -58,6 +67,11 @@ $items_cart = count($_SESSION['cart']);
 </main>
 
 <?= $this->render('//templates/footer') ?>
+
+<!-- чтобы сдвинуть поиск в меню к правому края. не нашел как добавить в виджет -->
+<script>
+    document.querySelector('#w0-collapse').classList.add('justify-content-between');
+</script>
 
 <?php $this->endBody() ?>
 </body>

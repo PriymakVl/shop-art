@@ -156,6 +156,16 @@ class SiteController extends AppController
         return $this->render('about');
     }
 
+    /**
+     * Displays shipping page.
+     *
+     * @return string
+     */
+    public function actionShipping()
+    {
+        return $this->render('shipping');
+    }
+
     private function getFiguresForPagination($cat_id)
     {
         $figures = Figure::getForCategory($cat_id);
