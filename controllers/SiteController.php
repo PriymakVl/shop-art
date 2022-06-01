@@ -13,6 +13,7 @@ use app\models\ContactForm;
 use app\models\categories\Category;
 use app\models\figures\Figure;
 use app\models\Cart;
+use app\models\Author;
 
 class SiteController extends AppController
 {
@@ -153,7 +154,8 @@ class SiteController extends AppController
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $author = Author::findOne(1);
+        return $this->render('about', ['author' => $author]);
     }
 
     /**

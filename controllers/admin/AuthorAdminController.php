@@ -39,9 +39,10 @@ class AuthorAdminController extends Controller
      */
     public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = Author::findOne(['id' => 1]);
+        $model = $model ?? $this->addAuthor();
+        // debug($model);
+        return $this->render('view', [ 'model' => $model]);
     }
 
     /**
@@ -53,7 +54,7 @@ class AuthorAdminController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Author::findOne(['id' => 1]);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -64,20 +65,14 @@ class AuthorAdminController extends Controller
         ]);
     }
 
-
-    /**
-     * Finds the Author model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Author the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel()
+    private function addAuthor()
     {
-        if (($model = Author::findOne(['id' => 1])) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+        $author = new Author();
+        $author->first_name = 'Не указано';
+        $author->last_name = 'Не указано';
+        $author->description = 'Не указано';
+        $author->save(false);
+        return $author;
     }
+
 }

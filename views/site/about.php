@@ -10,8 +10,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <h4>
+        <?= $author->fullName ?>
+    </h4>
     <p>
-        This is the About page.
+        <?= $author->description ?>
     </p>
+
 
 </div>

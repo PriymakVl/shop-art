@@ -50,9 +50,14 @@ $this->title = 'Админка сайта'
             ],
             ['label' => 'Категории', 'url' => ['/admin/category-admin/index']],
             ['label' => 'Заказы', 'url' => ['/admin/order-admin/index']],
-            ['label' => 'Автор', 'url' => ['/admin/author-admin/view']],
-            ['label' => 'Доставка', 'url' => ['/admin/delivery-admin/view']],
             ['label' => 'Подписчики', 'url' => ['/admin/subscriber-admin/index']],
+            [
+                'label' => 'Страницы',
+                'items' => [
+                    ['label' => 'Автор', 'url' => ['/admin/author-admin/view']],
+                    ['label' => 'Доставка', 'url' => ['/admin/delivery-admin/view']],
+                ]
+            ]
         ],
     ]);
     NavBar::end();
