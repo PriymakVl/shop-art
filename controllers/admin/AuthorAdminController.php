@@ -41,7 +41,6 @@ class AuthorAdminController extends Controller
     {
         $model = Author::findOne(['id' => 1]);
         $model = $model ?? $this->addAuthor();
-        // debug($model);
         return $this->render('view', [ 'model' => $model]);
     }
 

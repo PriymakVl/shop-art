@@ -14,6 +14,7 @@ use app\models\categories\Category;
 use app\models\figures\Figure;
 use app\models\Cart;
 use app\models\Author;
+use app\models\Delivery;
 
 class SiteController extends AppController
 {
@@ -165,7 +166,8 @@ class SiteController extends AppController
      */
     public function actionShipping()
     {
-        return $this->render('shipping');
+        $model = Delivery::findOne(1);
+        return $this->render('shipping', ['model' => $model]);
     }
 
     private function getFiguresForPagination($cat_id)

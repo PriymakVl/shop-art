@@ -35,13 +35,13 @@ class DeliveryAdminController extends AppController
     /**
      * Displays a single Delivery model.
      * @return string
-     * @throws NotFoundHttpException if the model cannot be found
+     * 
      */
     public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel(),
-        ]);
+        $model = Delivery::findOne(['id' => 1]);
+        $model = $model ?? $this->addDelivery();
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
@@ -49,11 +49,11 @@ class DeliveryAdminController extends AppController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * 
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Delivery::findOne(['id' => 1]);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -64,19 +64,12 @@ class DeliveryAdminController extends AppController
         ]);
     }
 
-    /**
-     * Finds the Delivery model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Delivery the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel()
+    // if page not 
+    private function addDelivery()
     {
-        if (($model = Delivery::findOne(['id' => 1])) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+        $delivery = new Delivery();
+        $delivery->text = 'Не указана';
+        $delivery->save(false);
+        return $delivery;
     }
 }

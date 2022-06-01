@@ -29,7 +29,7 @@ $this->title = 'Админка сайта'
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Админка',
+        'brandLabel' => 'Магазин',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
