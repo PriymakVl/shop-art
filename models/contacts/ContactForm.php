@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\contacts;
 
 use Yii;
 use yii\base\Model;

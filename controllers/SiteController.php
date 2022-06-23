@@ -9,7 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\contacts\ContactForm;
 use app\models\categories\Category;
 use app\models\figures\Figure;
 use app\models\Cart;

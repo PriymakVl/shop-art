@@ -50,6 +50,7 @@ $this->title = 'Админка сайта'
             ],
             ['label' => 'Категории', 'url' => ['/admin/category-admin/index']],
             ['label' => 'Заказы', 'url' => ['/admin/order-admin/index']],
+            ['label' => 'Контакты', 'url' => ['/admin/contact-admin/index']],
             ['label' => 'Подписчики', 'url' => ['/admin/subscriber-admin/index']],
             [
                 'label' => 'Страницы',
