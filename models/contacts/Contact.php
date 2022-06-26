@@ -53,12 +53,12 @@ class Contact extends \app\models\AppModel
         return [
             'id' => 'ID',
             'email' => 'Email',
-            'name' => 'Name',
-            'subject' => 'Subject',
-            'body' => 'Body',
-            'date' => 'Date',
+            'name' => 'Имя',
+            'subject' => 'Тема',
+            'body' => 'Текст',
+            'date' => 'Дата',
             'status' => 'Status',
-            'state' => 'State',
+            'state' => 'Состояние',
         ];
     }
 }

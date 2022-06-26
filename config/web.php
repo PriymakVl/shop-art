@@ -55,6 +55,7 @@ $config = [
                 'shipping' => 'site/shipping',
                 'figure' => 'site/figure',
                 'cart' => 'cart/index',
+                'admin-panel' => 'site/login',
             ],
         ],
     ],

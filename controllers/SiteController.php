@@ -97,14 +97,14 @@ class SiteController extends AppController
     }
 
     /**
-     * Login action.
+     * Login action admin panel.
      *
      * @return Response|string
      */
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/admin/category/index']);
         }
 
         $model = new LoginForm();
