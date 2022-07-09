@@ -56,6 +56,7 @@ $config = [
                 'figure' => 'site/figure',
                 'cart' => 'cart/index',
                 'admin-panel' => 'site/login',
+                'search' => 'site/search',
             ],
         ],
     ],

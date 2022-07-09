@@ -103,13 +103,13 @@ class SiteController extends AppController
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/admin/category/index']);
-        }
+        // if (!Yii::$app->user->isGuest) {
+        //     return $this->redirect(['/admin/category-admin/index']);
+        // }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['/admin/category-admin/index']);
         }
 
         $model->password = '';
@@ -168,6 +168,13 @@ class SiteController extends AppController
     {
         $model = Delivery::findOne(1);
         return $this->render('shipping', ['model' => $model]);
+    }
+
+    public function actionSearch()
+    {
+        $search = Yii::$app->request->post('search');
+        $figures = Figure::find()->filterWhere(['like', 'name', $search])->all();
+        return $this->render('search', ['figures' => $figures, 'search' => $search]);
     }
 
     private function getFiguresForPagination($cat_id)

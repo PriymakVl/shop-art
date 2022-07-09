@@ -6,13 +6,13 @@
     $subscribe = new Subscriber();
 ?>
 
-<footer class="footer mt-auto py-3 text-muted mb-3">
+<footer class="footer py-3 text-muted mb-5">
     <div class="container">
         <!-- update subscription form -->
         <div class="row justify-content-center">
-            <? $form = ActiveForm::begin(['action' => '/admin/subscriber-admin/create', 'options' => ['class' => 'form-inline']]); ?>
+            <? $form = ActiveForm::begin(['action' => '/admin/subscriber-admin/create', 'options' => ['class' => 'mb-5 form-inline']]); ?>
                 <?= $form->field($subscribe, 'email')->label(false) ?>
-                <?= Html::submitButton('Subscribe', ['class' => 'btn btn-primary', 'name' => 'subscribe', 'value' => 'yes'])?>
+                <?= Html::submitButton('Subscribe', ['class' => 'ml-2 btn btn-primary', 'name' => 'subscribe', 'value' => 'yes'])?>
             <? ActiveForm::end(); ?>
         </div>
         <!-- footer content -->
